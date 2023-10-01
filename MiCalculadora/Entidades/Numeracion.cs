@@ -135,7 +135,6 @@ namespace Entidades
             else
             {
                 this.valorNumerico = BinarioADecimal(valor);
-
             }
         }
         /// <summary>
@@ -268,7 +267,7 @@ namespace Entidades
         }
         public override int GetHashCode()
         {
-            return (valorNumerico, sistema).GetHashCode();
+            return HashCode.Combine(valorNumerico, sistema);
         }
     }
 }

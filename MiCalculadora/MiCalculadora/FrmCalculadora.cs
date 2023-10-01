@@ -46,10 +46,18 @@ namespace MiCalculadora
             this.calculadora = new Operacion(this.primerOperando, this.segundoOperando);
 
             string value = this.cbxOperacion.Items[this.cbxOperacion.SelectedIndex].ToString();
-            char tipoOperacion = char.Parse(value.Trim());
+            char tipoOperacion;
+            if (value == null)
+            {
+                tipoOperacion = '+';
+            }
+            else
+            {
+                tipoOperacion = char.Parse(value.Trim());
+            }
 
             this.resultado = calculadora.Operar(tipoOperacion);
-            setResultado();
+            SetResultado();
         }
 
         private void TxtPrimerOperador_TextChanged(object sender, EventArgs e)
@@ -63,15 +71,20 @@ namespace MiCalculadora
         private void RdbDecimal_CheckedChanged(object sender, EventArgs e)
         {
             this.sistema = Numeracion.ESistema.Decimal;
-            setResultado();
+            SetResultado();
         }
         private void RdbBinario_CheckedChanged(object sender, EventArgs e)
         {
             this.sistema = Numeracion.ESistema.Binario;
-            setResultado();
+            SetResultado();
         }
-        private void setResultado()
+        private void SetResultado()
         {
+            if (string.IsNullOrEmpty(this.txtPrimerOperador.Text) || string.IsNullOrEmpty(this.txtSegundoOperador.Text))
+            {
+                return;
+            }
+
             if (this.sistema == Numeracion.ESistema.Binario)
             {
                 this.lblResultado.Text = $"Resultado : {this.resultado.ConvertirA(Numeracion.ESistema.Binario)}";
