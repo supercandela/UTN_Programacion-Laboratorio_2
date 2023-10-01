@@ -37,7 +37,7 @@ namespace Entidades
                         return "Numero Inválido";
                     } else
                     {
-                        return this.DecimalABinario(Convert.ToInt32(this.valorNumerico));
+                        return DecimalABinario(Convert.ToInt32(this.valorNumerico));
                     }
                 }
             }
@@ -47,11 +47,11 @@ namespace Entidades
         /// </summary>
         /// <param name="valor">Valor a convertir.</param>
         /// <returns>El valor convertido de string a double. Si no se pudo convertir o el valor era inválido, devuelve un MinDouble.</returns>
-        private double BinarioADecimal (string valor)
+        private static double BinarioADecimal (string valor)
         {
             double valorDecimal;
 
-            if (this.EsBinario(valor))
+            if (EsBinario(valor))
             {
                 valorDecimal = Convert.ToInt32(valor, 2);
             }
@@ -82,11 +82,9 @@ namespace Entidades
                 }
                 else
                 {
-                    valorConvertido = this.DecimalABinario(this.valorNumerico.ToString());
+                    valorConvertido = DecimalABinario(this.valorNumerico.ToString());
                 }
             }
-
-
             return valorConvertido;
         }
         /// <summary>
@@ -94,7 +92,7 @@ namespace Entidades
         /// </summary>
         /// <param name="valor"></param>
         /// <returns></returns>
-        private string DecimalABinario(int valor)
+        private static string DecimalABinario(int valor)
         {
             return Convert.ToString(valor, 2);
         }
@@ -103,16 +101,16 @@ namespace Entidades
         /// </summary>
         /// <param name="valor"></param>
         /// <returns></returns>
-        private string DecimalABinario(string valor)
+        private static string DecimalABinario(string valor)
         {
-            return this.DecimalABinario(Convert.ToInt32(valor));
+            return DecimalABinario(Convert.ToInt32(valor));
         }
         /// <summary>
         /// Valida que una cadena de caracteres esté compuesta SOLAMENTE por caracteres '0' o '1'.
         /// </summary>
         /// <param name="valor"></param>
         /// <returns>True si la cadena está compuesta sólo por '0' o '1'. False si la cadena tiene otros caracteres.</returns>
-        private bool EsBinario(string valor)
+        private static bool EsBinario(string valor)
         {
             return Regex.IsMatch(valor, "^[01]+$");
         }
@@ -136,7 +134,7 @@ namespace Entidades
             }
             else
             {
-                this.valorNumerico = this.BinarioADecimal(valor);
+                this.valorNumerico = BinarioADecimal(valor);
 
             }
         }
@@ -158,16 +156,35 @@ namespace Entidades
         {
             this.InicializarValores(valor, sistema);
         }
-        
-        ///OPERADORES
+        /// <summary>
+        /// Sobrecarga de operador !=.
+        /// Un ESistema y una Numeracion serán iguales si el atributo ESistema del objeto Numeracion es igual al ESistema comparado.
+        /// </summary>
+        /// <param name="sistema"></param>
+        /// <param name="numeracion"></param>
+        /// <returns>Bool</returns>
         public static bool operator != (ESistema sistema, Numeracion numeracion)
         {
             return sistema != numeracion.sistema;
         }
+        /// <summary>
+        /// Sobrecarga de operador !=.
+        /// Dos objetos de tipo Numeracion serán iguales si el atributo ESistema del primer objeto es igual al atributo ESistema del segundo.
+        /// </summary>
+        /// <param name="n1"></param>
+        /// <param name="n2"></param>
+        /// <returns>Bool</returns>
         public static bool operator != (Numeracion n1, Numeracion n2)
         {
             return n1.sistema != n2.sistema;
         }
+        /// <summary>
+        /// Sobrecarga de operador -.
+        /// Toma el primer objeto recibido por parámetro y le resta el segundo.
+        /// </summary>
+        /// <param name="n1"></param>
+        /// <param name="n2"></param>
+        /// <returns>Numeracion. Resultado de la operación matemática.</returns>
         public static Numeracion operator - (Numeracion n1, Numeracion n2)
         {
             Numeracion resultado = new Numeracion(double.MinValue, n1.sistema);
@@ -177,6 +194,13 @@ namespace Entidades
             }
             return resultado;
         }
+        /// <summary>
+        /// Sobrecarga de operador *.
+        /// Toma el primer objeto recibido por parámetro y le multiplica el segundo.
+        /// </summary>
+        /// <param name="n1"></param>
+        /// <param name="n2"></param>
+        /// <returns>Numeracion. Resultado de la operación matemática.</returns>
         public static Numeracion operator * (Numeracion n1, Numeracion n2)
         {
             Numeracion resultado = new Numeracion(double.MinValue, n1.sistema);
@@ -186,6 +210,13 @@ namespace Entidades
             }
             return resultado;
         }
+        /// <summary>
+        /// Sobrecarga de operador /.
+        /// Toma el primer objeto recibido por parámetro y lo divide por el segundo.
+        /// </summary>
+        /// <param name="n1"></param>
+        /// <param name="n2"></param>
+        /// <returns>Numeracion. Resultado de la operación matemática.</returns>
         public static Numeracion operator / (Numeracion n1, Numeracion n2)
         {
             Numeracion resultado = new Numeracion(double.MinValue, n1.sistema);
@@ -195,6 +226,13 @@ namespace Entidades
             }
             return resultado;
         }
+        /// <summary>
+        /// Sobrecarga de operador +.
+        /// Toma el primer objeto recibido por parámetro y le suma el segundo.
+        /// </summary>
+        /// <param name="n1"></param>
+        /// <param name="n2"></param>
+        /// <returns>Numeracion. Resultado de la operación matemática.</returns>
         public static Numeracion operator + (Numeracion n1, Numeracion n2)
         {
             Numeracion resultado = new Numeracion(double.MinValue, n1.sistema);
@@ -204,10 +242,24 @@ namespace Entidades
             }
             return resultado;
         }
+        /// <summary>
+        /// Sobrecarga de operador ==.
+        /// Un ESistema y una Numeracion serán iguales si el atributo ESistema del objeto Numeracion es igual al ESistema comparado.
+        /// </summary>
+        /// <param name="sistema"></param>
+        /// <param name="numeracion"></param>
+        /// <returns>Bool</returns>
         public static bool operator == (ESistema sistema, Numeracion numeracion)
         {
             return sistema == numeracion.sistema;
         }
+        /// <summary>
+        /// Sobrecarga de operador ==.
+        /// Dos objetos de tipo Numeracion serán iguales si el atributo ESistema del primer objeto es igual al atributo ESistema del segundo.
+        /// </summary>
+        /// <param name="n1"></param>
+        /// <param name="n2"></param>
+        /// <returns>Bool</returns>
         public static bool operator == (Numeracion n1, Numeracion n2)
         {
             return n1.sistema == n2.sistema;
@@ -220,6 +272,23 @@ namespace Entidades
         {
             Decimal,
             Binario
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj != null)
+            {
+                Numeracion numero = obj as Numeracion;
+                return numero is not null && this == numero;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public override int GetHashCode()
+        {
+            return (valorNumerico, sistema).GetHashCode();
         }
     }
 }

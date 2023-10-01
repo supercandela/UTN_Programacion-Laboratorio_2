@@ -5,11 +5,16 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiCalculadora", "MiCalculadora\MiCalculadora.csproj", "{C0F3327D-6832-4FC6-9CD2-965549B27AB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Entidades.csproj", "{6C7C5C04-2FCF-4F01-BEA6-6E11705A2DF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entidades", "Entidades\Entidades.csproj", "{6C7C5C04-2FCF-4F01-BEA6-6E11705A2DF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{7748600D-38E1-4056-8852-950B1142A60D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{7748600D-38E1-4056-8852-950B1142A60D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{6C7C5C04-2FCF-4F01-BEA6-6E11705A2DF2} = {6C7C5C04-2FCF-4F01-BEA6-6E11705A2DF2}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E816822E-D456-4435-99EC-7F24DCA85F96}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
 Global
