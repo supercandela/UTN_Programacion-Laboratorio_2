@@ -34,11 +34,11 @@ namespace MiCalculadora
             grpSistemaResultado = new GroupBox();
             rdbBinario = new RadioButton();
             rdbDecimal = new RadioButton();
-            txtPrimerOperador = new TextBox();
             lblResultado = new Label();
             lblPrimerOperador = new Label();
             lblOperacion = new Label();
             lblSegundoOperador = new Label();
+            txtPrimerOperador = new TextBox();
             txtSegundoOperador = new TextBox();
             btnOperar = new Button();
             btnLimpiar = new Button();

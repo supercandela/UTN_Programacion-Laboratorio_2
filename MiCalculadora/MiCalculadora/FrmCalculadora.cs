@@ -72,16 +72,13 @@ namespace MiCalculadora
         }
         private void setResultado()
         {
-            if (this.resultado != null)
+            if (this.sistema == Numeracion.ESistema.Binario)
             {
-                if (this.sistema == Numeracion.ESistema.Binario)
-                {
-                    this.lblResultado.Text = $"Resultado : {this.resultado.ConvertirA(Numeracion.ESistema.Binario)}";
-                }
-                else
-                {
-                    this.lblResultado.Text = $"Resultado : {this.resultado.Valor}";
-                }
+                this.lblResultado.Text = $"Resultado : {this.resultado.ConvertirA(Numeracion.ESistema.Binario)}";
+            }
+            else
+            {
+                this.lblResultado.Text = $"Resultado : {this.resultado.Valor}";
             }
         }
     }
