@@ -70,14 +70,22 @@ namespace Entidades
         {
             string valorConvertido;
 
-            if (sistema == ESistema.Decimal)
+            if (this.valorNumerico == Double.MinValue || (sistema == ESistema.Binario && this.valorNumerico < 0))
             {
-                valorConvertido = this.valorNumerico.ToString();
+                valorConvertido = "Número Inválido";
             }
             else
             {
-                valorConvertido = this.DecimalABinario(this.valorNumerico.ToString());
+                if (sistema == ESistema.Decimal)
+                {
+                    valorConvertido = this.valorNumerico.ToString();
+                }
+                else
+                {
+                    valorConvertido = this.DecimalABinario(this.valorNumerico.ToString());
+                }
             }
+
 
             return valorConvertido;
         }
@@ -150,6 +158,61 @@ namespace Entidades
         {
             this.InicializarValores(valor, sistema);
         }
+        
+        ///OPERADORES
+        public static bool operator != (ESistema sistema, Numeracion numeracion)
+        {
+            return sistema != numeracion.sistema;
+        }
+        public static bool operator != (Numeracion n1, Numeracion n2)
+        {
+            return n1.sistema != n2.sistema;
+        }
+        public static Numeracion operator - (Numeracion n1, Numeracion n2)
+        {
+            Numeracion resultado = new Numeracion(double.MinValue, n1.sistema);
+            if (n1 == n2)
+            {
+                resultado.valorNumerico = n1.valorNumerico - n2.valorNumerico;
+            }
+            return resultado;
+        }
+        public static Numeracion operator * (Numeracion n1, Numeracion n2)
+        {
+            Numeracion resultado = new Numeracion(double.MinValue, n1.sistema);
+            if (n1 == n2)
+            {
+                resultado.valorNumerico = n1.valorNumerico * n2.valorNumerico;
+            }
+            return resultado;
+        }
+        public static Numeracion operator / (Numeracion n1, Numeracion n2)
+        {
+            Numeracion resultado = new Numeracion(double.MinValue, n1.sistema);
+            if (n1 == n2 && n2.valorNumerico != 0)
+            {
+                resultado.valorNumerico = n1.valorNumerico / n2.valorNumerico;
+            }
+            return resultado;
+        }
+        public static Numeracion operator + (Numeracion n1, Numeracion n2)
+        {
+            Numeracion resultado = new Numeracion(double.MinValue, n1.sistema);
+            if (n1 == n2)
+            {
+                resultado.valorNumerico = n1.valorNumerico + n2.valorNumerico;
+            }
+            return resultado;
+        }
+        public static bool operator == (ESistema sistema, Numeracion numeracion)
+        {
+            return sistema == numeracion.sistema;
+        }
+        public static bool operator == (Numeracion n1, Numeracion n2)
+        {
+            return n1.sistema == n2.sistema;
+        }
+
         /// <summary>
         /// Enumerable que contiene los dos sistemas numéricos en los que podrá crearse un objeto de tipo Numeracion.
         /// </summary>
