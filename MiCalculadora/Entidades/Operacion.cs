@@ -58,7 +58,7 @@ namespace Entidades
         /// </summary>
         /// <param name="operador"></param>
         /// <returns>Numeracion. Resultado de la operación realizada.</returns>
-        public Numeracion Operar (char operador)
+        public Numeracion Operar(char? operador)
         {
             Numeracion resultado;
             switch (operador)

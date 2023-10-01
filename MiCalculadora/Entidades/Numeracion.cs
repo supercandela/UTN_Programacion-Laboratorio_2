@@ -165,7 +165,7 @@ namespace Entidades
         /// <returns>Bool</returns>
         public static bool operator != (ESistema sistema, Numeracion numeracion)
         {
-            return sistema != numeracion.sistema;
+            return sistema == numeracion.sistema;
         }
         /// <summary>
         /// Sobrecarga de operador !=.
@@ -176,7 +176,7 @@ namespace Entidades
         /// <returns>Bool</returns>
         public static bool operator != (Numeracion n1, Numeracion n2)
         {
-            return n1.sistema != n2.sistema;
+            return n1 == n2;
         }
         /// <summary>
         /// Sobrecarga de operador -.
@@ -187,12 +187,7 @@ namespace Entidades
         /// <returns>Numeracion. Resultado de la operación matemática.</returns>
         public static Numeracion operator - (Numeracion n1, Numeracion n2)
         {
-            Numeracion resultado = new Numeracion(double.MinValue, n1.sistema);
-            if (n1 == n2)
-            {
-                resultado.valorNumerico = n1.valorNumerico - n2.valorNumerico;
-            }
-            return resultado;
+            return new Numeracion(n1.valorNumerico - n2.valorNumerico, n1.sistema);
         }
         /// <summary>
         /// Sobrecarga de operador *.
@@ -203,12 +198,7 @@ namespace Entidades
         /// <returns>Numeracion. Resultado de la operación matemática.</returns>
         public static Numeracion operator * (Numeracion n1, Numeracion n2)
         {
-            Numeracion resultado = new Numeracion(double.MinValue, n1.sistema);
-            if (n1 == n2)
-            {
-                resultado.valorNumerico = n1.valorNumerico * n2.valorNumerico;
-            }
-            return resultado;
+            return new Numeracion(n1.valorNumerico * n2.valorNumerico, n1.sistema);
         }
         /// <summary>
         /// Sobrecarga de operador /.
@@ -219,12 +209,7 @@ namespace Entidades
         /// <returns>Numeracion. Resultado de la operación matemática.</returns>
         public static Numeracion operator / (Numeracion n1, Numeracion n2)
         {
-            Numeracion resultado = new Numeracion(double.MinValue, n1.sistema);
-            if (n1 == n2 && n2.valorNumerico != 0)
-            {
-                resultado.valorNumerico = n1.valorNumerico / n2.valorNumerico;
-            }
-            return resultado;
+            return new Numeracion(n1.valorNumerico / n2.valorNumerico, n1.sistema);
         }
         /// <summary>
         /// Sobrecarga de operador +.
@@ -235,12 +220,7 @@ namespace Entidades
         /// <returns>Numeracion. Resultado de la operación matemática.</returns>
         public static Numeracion operator + (Numeracion n1, Numeracion n2)
         {
-            Numeracion resultado = new Numeracion(double.MinValue, n1.sistema);
-            if (n1 == n2)
-            {
-                resultado.valorNumerico = n1.valorNumerico + n2.valorNumerico;
-            }
-            return resultado;
+            return new Numeracion(n1.valorNumerico + n2.valorNumerico, n1.sistema);
         }
         /// <summary>
         /// Sobrecarga de operador ==.
