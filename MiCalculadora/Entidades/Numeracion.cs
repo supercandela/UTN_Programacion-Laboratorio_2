@@ -82,7 +82,8 @@ namespace Entidades
                 }
                 else
                 {
-                    valorConvertido = DecimalABinario(this.valorNumerico.ToString());
+                    int valorEntero = Convert.ToInt32(this.valorNumerico);
+                    valorConvertido = DecimalABinario(valorEntero.ToString());
                 }
             }
             return valorConvertido;

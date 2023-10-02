@@ -85,6 +85,10 @@ namespace MiCalculadora
             {
                 return;
             }
+            //if (!Regex.IsMatch(this.txtPrimerOperador.Text, @"^-?\d+(\.\d+)?$") || !Regex.IsMatch(this.txtSegundoOperador.Text, @"^-?\d+(\.\d+)?$"))
+            //{
+            //    return;
+            //}
 
             if (this.sistema == Numeracion.ESistema.Binario)
             {
