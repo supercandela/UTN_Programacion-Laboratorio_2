@@ -26,11 +26,7 @@ namespace MiCalculadora
 
         private void BtnCerrar_Click(object sender, EventArgs e)
         {
-            DialogResult confirmacionCerrar = MessageBox.Show("¿Desea cerrar la calculadora?", "Cierre", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (confirmacionCerrar == DialogResult.Yes)
-            {
-                this.Close();
-            }
+            this.Close();
         }
         private void BtnLimpiar_Click(object sender, EventArgs e)
         {

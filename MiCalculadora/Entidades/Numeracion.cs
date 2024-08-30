@@ -26,19 +26,17 @@ namespace Entidades
         {
             get
             {
-                if (this.sistema == ESistema.Decimal)
+                if (this.valorNumerico == Double.MinValue)
+                {
+                    return "Numero Inválido";
+                }
+                else if (this.sistema == ESistema.Decimal)
                 {
                     return this.valorNumerico.ToString();
                 }
                 else
                 {
-                    if (this.valorNumerico == Double.MinValue)
-                    {
-                        return "Numero Inválido";
-                    } else
-                    {
-                        return DecimalABinario(Convert.ToInt32(this.valorNumerico));
-                    }
+                    return DecimalABinario(Convert.ToInt32(this.valorNumerico));
                 }
             }
         }
@@ -49,11 +47,26 @@ namespace Entidades
         /// <returns>El valor convertido de string a double. Si no se pudo convertir o el valor era inválido, devuelve un MinDouble.</returns>
         private static double BinarioADecimal (string valor)
         {
-            double valorDecimal;
+            double valorDecimal = 0;
+            double valorConvertidoDouble;
 
-            if (EsBinario(valor))
+            if (EsBinario(valor) && double.TryParse(valor, out valorConvertidoDouble))
             {
-                valorDecimal = Convert.ToInt32(valor, 2);
+                //valorDecimal = Convert.ToInt32(valor, 2);
+                int digito = 0;
+                const int DIVISOR = 10;
+
+                for (double i = valorConvertidoDouble, j = 0; i > 0; i /= DIVISOR, j++)
+                {
+                    digito = (int)i % DIVISOR;
+                    if (digito != 1 && digito != 0)
+                    {
+                        return -1;
+                    }
+                    valorDecimal += digito * (int)Math.Pow(2, j);
+                }
+
+                return valorDecimal;
             }
             else
             {
@@ -95,7 +108,19 @@ namespace Entidades
         /// <returns></returns>
         private static string DecimalABinario(int valor)
         {
-            return Convert.ToString(valor, 2);
+            //return Convert.ToString(valor, 2);
+            double binario = 0;
+
+            const int DIVISOR = 2;
+            double digito = 0;
+
+            for (int i = valor % DIVISOR, j = 0; valor > 0; valor /= DIVISOR, i = valor % DIVISOR, j++)
+            {
+                digito = i % DIVISOR;
+                binario += digito * (double)Math.Pow(10, j);
+            }
+
+            return binario.ToString();
         }
         /// <summary>
         /// Convierte el valor de decimal a binario.
@@ -144,8 +169,9 @@ namespace Entidades
         /// <param name="valor"></param>
         /// <param name="sistema"></param>
         public Numeracion (double valor, ESistema sistema)
+            :this(valor.ToString(), sistema)
         {
-            this.InicializarValores(valor.ToString(), sistema);
+            
         }
         /// <summary>
         /// Constructor de clase. Recibe un string que representa el valor y un enumerable que representa el sistema numérico del objeto.
